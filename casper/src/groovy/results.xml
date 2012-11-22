@@ -1,0 +1,9 @@
+<testsuite>
+    <testcase classname="unknown" name="Vérification de dix vignettes au max">
+        <failure type="assert">Subject is strictly true</failure>
+    </testcase>
+    <testcase classname="unknown" name="Vérification de dix vignettes au max">
+        <failure type="assert">Subject is strictly true</failure>
+    </testcase>
+    <testcase classname="unknown" name="Vérification de dix vignettes au max"></testcase>
+</testsuite>

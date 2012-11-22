@@ -1,0 +1,1 @@
+<testsuite><testcase classname="unknown" name="True 1"></testcase><testcase classname="unknown" name="True 2"></testcase><testcase classname="unknown" name="False 1"></testcase><testcase classname="unknown" name="False 2"><failure type="assert">Subject is strictly true</failure></testcase></testsuite>
