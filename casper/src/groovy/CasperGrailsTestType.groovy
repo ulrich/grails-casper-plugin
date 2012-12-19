@@ -1,15 +1,15 @@
-import org.codehaus.groovy.grails.plugins.GrailsPluginManager
 import org.codehaus.groovy.grails.test.GrailsTestTypeResult
 import org.codehaus.groovy.grails.test.event.GrailsTestEventPublisher
+import org.codehaus.groovy.grails.test.event.GrailsTestRunNotifier
 import org.codehaus.groovy.grails.test.support.GrailsTestTypeSupport
 
 import java.lang.reflect.Modifier
 
-import static org.codehaus.groovy.grails.plugins.GrailsPluginUtils.getPluginDirForName
+import static groovy.io.FileType.FILES
 
 class CasperGrailsTestType extends GrailsTestTypeSupport {
 
-    static final SUFFIXES = ["Test", "Tests"].asImmutable()
+    static final SUFFIXES = ["test.coffee"].asImmutable()
 
     protected suite
 
@@ -19,10 +19,18 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
         super(name, sourceDirectory)
     }
 
-    protected List<String> getTestSuffixes() { SUFFIXES }
+    protected List<String> getTestSuffixes() {
+        SUFFIXES
+    }
 
     protected int doPrepare() {
-        1
+        def casperFiles = []
+
+        sourceDir.eachFileRecurse(FILES) { file ->
+            casperFiles << file
+        }
+        println "casperFiles= " + casperFiles
+        casperFiles.size()
     }
 
     protected getTestClasses() {
@@ -49,15 +57,17 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
     }
 
     protected createNotifier(eventPublisher) {
+        int total = 0
+        if (suite.hasProperty("children")) {
+            total = suite.children.collect {
+                it.hasProperty("children") ? it.children.size() : 0
+            }.sum()
+        }
+        def notifier = new GrailsTestRunNotifier(total)
+        notifier.addListener(createListener(eventPublisher))
+        notifier
     }
 
-    GrailsPluginManager grailsPluginManager
-
-    /**
-     *
-     * @param eventPublisher
-     * @return
-     */
     protected GrailsTestTypeResult doRun(GrailsTestEventPublisher eventPublisher) {
         // build the casperjs process
         def casperProcess = "casperjs $sourceDir/origine-test.coffee".execute()
