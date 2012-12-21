@@ -36,3 +36,4 @@ casper.then ->
 
 casper.run ->
   @test.renderResults true, 0, "TESTS-Casperjs-TestSuites.xml"
+

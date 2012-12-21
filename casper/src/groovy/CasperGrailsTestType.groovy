@@ -1,3 +1,4 @@
+import grails.build.logging.GrailsConsole
 import org.codehaus.groovy.grails.test.GrailsTestTypeResult
 import org.codehaus.groovy.grails.test.event.GrailsTestEventPublisher
 import org.codehaus.groovy.grails.test.event.GrailsTestRunNotifier
@@ -9,63 +10,31 @@ import static groovy.io.FileType.FILES
 
 class CasperGrailsTestType extends GrailsTestTypeSupport {
 
-    static final SUFFIXES = ["test.coffee"].asImmutable()
+    static final SUFFIXE = 'coffee'
 
-    protected suite
+    def casperFiles = []
 
-    protected mode
+    GrailsConsole grailsConsole
 
     CasperGrailsTestType(String name, String sourceDirectory) {
         super(name, sourceDirectory)
+
+        grailsConsole = GrailsConsole.getInstance()
     }
 
     protected List<String> getTestSuffixes() {
-        SUFFIXES
+        [SUFFIXE].asImmutable()
     }
 
     protected int doPrepare() {
-        def casperFiles = []
-
-        sourceDir.eachFileRecurse(FILES) { file ->
-            casperFiles << file
-        }
-        println "casperFiles= " + casperFiles
-        casperFiles.size()
-    }
-
-    protected getTestClasses() {
-        def classes = []
-        eachSourceFile { testTargetPattern, sourceFile ->
-            def testClass = sourceFileToClass(sourceFile)
-            if (!Modifier.isAbstract(testClass.modifiers)) {
-                classes << testClass
+        sourceDir.eachFileRecurse(FILES, { casperFile ->
+            if (casperFile.name.endsWith('coffee')) {
+                casperFiles << casperFile
             }
-        }
-        classes
-    }
+        })
+        grailsConsole.addStatus("Found Following Casper Test(s) File(s): " + casperFiles.collect { it.name })
 
-    protected createRunnerBuilder() {
-    }
-
-    protected createSuite(classes) {
-    }
-
-    protected createJUnitReportsFactory() {
-    }
-
-    protected createListener(eventPublisher) {
-    }
-
-    protected createNotifier(eventPublisher) {
-        int total = 0
-        if (suite.hasProperty("children")) {
-            total = suite.children.collect {
-                it.hasProperty("children") ? it.children.size() : 0
-            }.sum()
-        }
-        def notifier = new GrailsTestRunNotifier(total)
-        notifier.addListener(createListener(eventPublisher))
-        notifier
+        casperFiles.size()
     }
 
     protected GrailsTestTypeResult doRun(GrailsTestEventPublisher eventPublisher) {
