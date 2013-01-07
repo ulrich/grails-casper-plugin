@@ -41,9 +41,8 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
      * @return
      */
     protected GrailsTestTypeResult doRun(GrailsTestEventPublisher eventPublisher) {
-        def totalOfTests = 0
-        def totalOfFailureTests = 0
-        def totalOfSuccessTests = 0
+        def totalOfFailureTest = 0
+        def totalOfSuccessTest = 0
 
         // run all found Casper tests
         casperFiles.each { casperFile ->
@@ -62,19 +61,22 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
             // parse the content file to build status
             def testSuite = new XmlSlurper().parse(new StringReader(resultFileContent))
 
-            totalOfTests += testSuite.testcase.size()
-            totalOfFailureTests += testSuite.testcase.failure.size()
-            totalOfSuccessTests += totalOfTests - totalOfFailureTests
-        }
-        grailsConsole.addStatus("Total of test(s): " + totalOfTests + ", number of failure: " + totalOfFailureTests + ", number of success: " + totalOfSuccessTests)
+            def numberOfTest = testSuite.testcase.size()
+            def numberOfFailureTest = testSuite.testcase.failure.size()
+            def numberOfSuccessTest = numberOfTest - numberOfFailureTest
 
+            totalOfFailureTest += numberOfFailureTest
+            totalOfSuccessTest += numberOfSuccessTest
+
+            grailsConsole.addStatus("Number of test for ${casperFile.name}: " + numberOfTest + ", number of failure: " + numberOfFailureTest + ", number of success: " + numberOfSuccessTest)
+        }
         new GrailsTestTypeResult() {
             int getPassCount() {
-                return totalOfSuccessTests
+                return totalOfSuccessTest
             }
 
             int getFailCount() {
-                return totalOfFailureTests
+                return totalOfFailureTest
             }
         }
     }

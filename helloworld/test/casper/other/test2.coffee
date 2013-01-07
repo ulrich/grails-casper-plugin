@@ -1,6 +1,6 @@
 casper = require('casper').create({
-	verbose: true,
-	logLevel: 'error'
+  verbose: true,
+  logLevel: 'error'
 })
 
 casper.start "http://www.google.fr", ->
@@ -15,9 +15,6 @@ casper.then ->
 
 casper.then ->
   @test.assertTrue (true), "False 1"
-
-casper.then ->
-  @test.assertTrue (true), "False 2"
 
 casper.run ->
   @test.renderResults true, 0, this.cli.get('xunitFileName') || false

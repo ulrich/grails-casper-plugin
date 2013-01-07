@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e31613b2-5e5d-446a-bfd2-25cec6189648" name="Default" comment="" />
+    <list default="true" id="e31613b2-5e5d-446a-bfd2-25cec6189648" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../helloworld/test/casper/origine-test.coffee" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../helloworld/test/casper/other/origine2-test._offee" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/CasperGrailsTestType.groovy" afterPath="$PROJECT_DIR$/src/groovy/CasperGrailsTestType.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="casper.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME$/.grails/" />
-    <file path="/CasperGrailsTestType.groovy" changelist="e31613b2-5e5d-446a-bfd2-25cec6189648" time="1357595891722" ignored="false" />
+    <file path="/CasperGrailsTestType.groovy" changelist="e31613b2-5e5d-446a-bfd2-25cec6189648" time="1357598068917" ignored="false" />
     <file path="/Dummy.txt" changelist="e31613b2-5e5d-446a-bfd2-25cec6189648" time="1357592055937" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/XMLSchema-instance.xsd" changelist="e31613b2-5e5d-446a-bfd2-25cec6189648" time="1352843588592" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xinclude.xsd" changelist="e31613b2-5e5d-446a-bfd2-25cec6189648" time="1352843588592" ignored="false" />
@@ -276,10 +282,8 @@
       <file leaf-file-name="CasperGrailsTestType.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/groovy/CasperGrailsTestType.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="0" selection-start="1907" selection-end="1907" vertical-scroll-proportion="0.450805">
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state line="83" column="0" selection-start="2765" selection-end="2765" vertical-scroll-proportion="0.93559927">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -301,7 +305,7 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitLogSettings">
     <option name="myDateState">
@@ -323,7 +327,7 @@
     <option name="width" value="1366" />
     <option name="height" value="743" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -385,7 +389,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -538,7 +542,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.5037879" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5037879" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16363636" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998326" sideWeight="0.4909091" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952815" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -741,10 +745,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/groovy/CasperGrailsTestType.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="1907" selection-end="1907" vertical-scroll-proportion="0.450805">
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state line="83" column="0" selection-start="2765" selection-end="2765" vertical-scroll-proportion="0.93559927">
+          <folding />
         </state>
       </provider>
     </entry>
