@@ -8,14 +8,13 @@ ivy-cache
 .settings
 stacktrace.log
 .hg*
-.idea
 /*.zip
 /plugin.xml
 /*.log
 /*DB.*
 /cobertura.ser
 .DS_Store
-/target
+*/target/
 /out/
 /web-app/plugins
 /web-app/WEB-INF/classes
@@ -29,3 +28,5 @@ stacktrace.log
 *.iml
 *.ipr
 .session
+.idea
+*/.idea/*

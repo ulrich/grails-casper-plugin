@@ -1,10 +1,7 @@
 import grails.build.logging.GrailsConsole
 import org.codehaus.groovy.grails.test.GrailsTestTypeResult
 import org.codehaus.groovy.grails.test.event.GrailsTestEventPublisher
-import org.codehaus.groovy.grails.test.event.GrailsTestRunNotifier
 import org.codehaus.groovy.grails.test.support.GrailsTestTypeSupport
-
-import java.lang.reflect.Modifier
 
 import static groovy.io.FileType.FILES
 
@@ -37,24 +34,39 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
         casperFiles.size()
     }
 
+    /**
+     * This method aims to run all found tests Casper files.
+     *
+     * @param eventPublisher
+     * @return
+     */
     protected GrailsTestTypeResult doRun(GrailsTestEventPublisher eventPublisher) {
-        // build the casperjs process
-        def casperProcess = "casperjs $sourceDir/origine-test.coffee".execute()
+        def totalOfTests = 0
+        def totalOfFailureTests = 0
+        def totalOfSuccessTests = 0
 
-        // wait for the termination of execution
-        casperProcess.waitFor()
+        // run all found Casper tests
+        casperFiles.each { casperFile ->
+            // build xunit file name
+            def xunitFileName = "TESTS-casperjs-${casperFile.name}.xml"
 
-        // get the content of xunit file
-        String resultFileContent = new File('TESTS-Casperjs-TestSuites.xml').text
+            // build casperjs process for current file
+            def casperProcess = "casperjs test $casperFile --xunitFileName=$xunitFileName".execute()
 
-        // parse the content file to build status
-        def testSuite = new XmlSlurper().parse(new StringReader(resultFileContent))
+            // wait for the termination of execution
+            casperProcess.waitFor()
 
-        def totalOfTests = testSuite.testcase.size()
-        def totalOfFailureTests = testSuite.testcase.failure.size()
-        def totalOfSuccessTests = totalOfTests - totalOfFailureTests
+            // get the content of xunit file
+            String resultFileContent = new File("$xunitFileName").text
 
-        println "Total of test(s): " + totalOfTests + ", number of failure: " + totalOfFailureTests + ", number of success: " + totalOfSuccessTests
+            // parse the content file to build status
+            def testSuite = new XmlSlurper().parse(new StringReader(resultFileContent))
+
+            totalOfTests += testSuite.testcase.size()
+            totalOfFailureTests += testSuite.testcase.failure.size()
+            totalOfSuccessTests += totalOfTests - totalOfFailureTests
+        }
+        grailsConsole.addStatus("Total of test(s): " + totalOfTests + ", number of failure: " + totalOfFailureTests + ", number of success: " + totalOfSuccessTests)
 
         new GrailsTestTypeResult() {
             int getPassCount() {

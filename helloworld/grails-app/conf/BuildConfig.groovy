@@ -6,7 +6,7 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-grails.plugin.location.casper = "/home/GROUPEVSC/ulrich_vachon/projects/grails-casper-plugin/casper"
+grails.plugin.location.casper = "/home/ulrich/projects/grails-casper-plugin/casper"
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
