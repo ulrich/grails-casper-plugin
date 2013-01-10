@@ -1,32 +1,43 @@
-.release_version
-^tomcat*
-ivy-cache
-*~
-*.log
+# .gitignore for Grails 1.2 and 1.3
+
+# web application files
+/web-app/WEB-INF
+
+# IDE support files
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*
+/eclipse
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# general HSQL database files
 *Db.properties
 *Db.script
-.settings
-stacktrace.log
-.hg*
+
+# logs
+/stacktrace.log
+/test/reports
+/logs
+
+# project release file
+/*.war
+
+# plugin release file
 /*.zip
-/plugin.xml
-/*.log
-/*DB.*
-/cobertura.ser
-.DS_Store
-*/target/
-/out/
+
+# older plugin install locations
+/plugins
 /web-app/plugins
 /web-app/WEB-INF/classes
-/plugins
-/pom.xml.*
-/release.properties
-/cloudbees-sdk-1.2.1
 
-# IntelliJ
+# "temporary" build files
+/target
+
+# other
 *.iws
-*.iml
-*.ipr
-.session
-.idea
-*/.idea/*
