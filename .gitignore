@@ -45,3 +45,4 @@
 *.iws
 *.iml
 */.idea/
+*/casper.ipr
