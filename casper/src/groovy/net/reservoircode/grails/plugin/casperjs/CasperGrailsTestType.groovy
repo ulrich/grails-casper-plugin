@@ -1,4 +1,3 @@
-package net.reservoircode.grails.plugin.casperjs
 /**
  * Copyright (c) 2013 Ulrich VACHON for Reservoir Code.
  *
@@ -23,6 +22,8 @@ package net.reservoircode.grails.plugin.casperjs
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
+package net.reservoircode.grails.plugin.casperjs
 
 import grails.build.logging.GrailsConsole
 import org.codehaus.groovy.grails.test.GrailsTestTypeResult
