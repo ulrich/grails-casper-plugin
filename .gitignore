@@ -44,5 +44,5 @@
 # other
 *.iws
 *.iml
-*/.idea/
-*/casper.ipr
+*.idea/
+*.ipr
