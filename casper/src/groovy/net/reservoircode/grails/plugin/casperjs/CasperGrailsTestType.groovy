@@ -1,3 +1,29 @@
+package net.reservoircode.grails.plugin.casperjs
+/**
+ * Copyright (c) 2013 Ulrich VACHON for Reservoir Code.
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 import grails.build.logging.GrailsConsole
 import org.codehaus.groovy.grails.test.GrailsTestTypeResult
 import org.codehaus.groovy.grails.test.event.GrailsTestEventPublisher
@@ -7,11 +33,14 @@ import static groovy.io.FileType.FILES
 
 class CasperGrailsTestType extends GrailsTestTypeSupport {
 
+    // the tests files extensions collection
     static final SUFFIXES = ['coffee', 'js']
 
-    def casperFiles = []
-
+    // the instance of grails console
     GrailsConsole grailsConsole
+
+    // the CasperJS files registered to be execute
+    def casperFiles = []
 
     CasperGrailsTestType(String name, String sourceDirectory) {
         super(name, sourceDirectory)
@@ -19,10 +48,20 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
         grailsConsole = GrailsConsole.getInstance()
     }
 
+    /**
+     * This method return the tests files extension manageable by the plugin.
+     *
+     * @return the tests files extension.
+     */
     protected List<String> getTestExtensions() {
         [SUFFIXES].asImmutable()
     }
 
+    /**
+     * This method scans recursively the tests directories to find, count and register tests files.
+     *
+     * @return the number of tests files.
+     */
     protected int doPrepare() {
         sourceDir.eachFileRecurse(FILES, { file ->
             SUFFIXES.findAll {
@@ -31,9 +70,14 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
                 }
             }
         })
-        grailsConsole.addStatus("Executing following CasperJS test(s) file(s): " + casperFiles.collect { it.name })
+        def numberOfTest = casperFiles.size()
 
-        casperFiles.size()
+        if (numberOfTest < 1) {
+            grailsConsole.addStatus('No CasperJS test to execute')
+        } else {
+            grailsConsole.addStatus("Executing following CasperJS test(s) file(s): ${casperFiles.collect { it.name }}")
+        }
+        numberOfTest
     }
 
     /**
@@ -41,7 +85,6 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
      */
     protected GrailsTestTypeResult doRun(GrailsTestEventPublisher eventPublisher) {
         def totalOfFailureTest = 0
-
         def totalOfSuccessTest = 0
 
         // run all found Casper tests
@@ -68,7 +111,7 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
             totalOfFailureTest += numberOfFailureTest
             totalOfSuccessTest += numberOfSuccessTest
 
-            grailsConsole.addStatus("Executed ${numberOfTest} test(s) for ${casperFile.name}: number of failure: ${numberOfFailureTest}, number of success: ${numberOfSuccessTest}")
+            grailsConsole.addStatus("Executed ${numberOfTest} test(s) for ${casperFile.name}: ${numberOfFailureTest} failure, ${numberOfSuccessTest} success")
         }
         new GrailsTestTypeResult() {
             int getPassCount() {
