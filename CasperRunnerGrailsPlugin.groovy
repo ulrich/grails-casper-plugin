@@ -1,4 +1,4 @@
-class CasperGrailsPlugin {
+class CasperRunnerGrailsPlugin {
     def version = "0.1"
 
     def grailsVersion = "2.0 > *"
@@ -6,7 +6,7 @@ class CasperGrailsPlugin {
     def dependsOn = [:]
 
     def pluginExcludes = [
-            "grails-app/views/error.gsp"
+        "grails-app/views/error.gsp"
     ]
 
     def title = "Casper Tests Runner Plugin"
