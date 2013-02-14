@@ -7,7 +7,7 @@ import static groovy.io.FileType.FILES
 
 class CasperGrailsTestType extends GrailsTestTypeSupport {
 
-    static final SUFFIXE = 'coffee'
+    static final SUFFIXES = ['coffee', 'js']
 
     def casperFiles = []
 
@@ -19,35 +19,35 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
         grailsConsole = GrailsConsole.getInstance()
     }
 
-    protected List<String> getTestSuffixes() {
-        [SUFFIXE].asImmutable()
+    protected List<String> getTestExtensions() {
+        [SUFFIXES].asImmutable()
     }
 
     protected int doPrepare() {
-        sourceDir.eachFileRecurse(FILES, { casperFile ->
-            if (casperFile.name.endsWith('coffee')) {
-                casperFiles << casperFile
+        sourceDir.eachFileRecurse(FILES, { file ->
+            SUFFIXES.findAll {
+                if (file.name.endsWith(it)) {
+                    casperFiles << file
+                }
             }
         })
-        grailsConsole.addStatus("Found Following Casper Test(s) File(s): " + casperFiles.collect { it.name })
+        grailsConsole.addStatus("Executing following CasperJS test(s) file(s): " + casperFiles.collect { it.name })
 
         casperFiles.size()
     }
 
     /**
-     * This method aims to run all found tests Casper files.
-     *
-     * @param eventPublisher
-     * @return
+     * This method aims to run all found CasperJS tests files.
      */
     protected GrailsTestTypeResult doRun(GrailsTestEventPublisher eventPublisher) {
         def totalOfFailureTest = 0
+
         def totalOfSuccessTest = 0
 
         // run all found Casper tests
         casperFiles.each { casperFile ->
             // build xunit file name
-            def xunitFileName = "TESTS-casperjs-${casperFile.name}.xml"
+            def xunitFileName = "target/TESTS-casperjs-${casperFile.name}.xml"
 
             // build casperjs process for current file
             def casperProcess = "casperjs test $casperFile --xunitFileName=$xunitFileName".execute()
@@ -68,7 +68,7 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
             totalOfFailureTest += numberOfFailureTest
             totalOfSuccessTest += numberOfSuccessTest
 
-            grailsConsole.addStatus("Number of test for ${casperFile.name}: " + numberOfTest + ", number of failure: " + numberOfFailureTest + ", number of success: " + numberOfSuccessTest)
+            grailsConsole.addStatus("Executed ${numberOfTest} test(s) for ${casperFile.name}: number of failure: ${numberOfFailureTest}, number of success: ${numberOfSuccessTest}")
         }
         new GrailsTestTypeResult() {
             int getPassCount() {

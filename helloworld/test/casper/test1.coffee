@@ -14,10 +14,10 @@ casper.then ->
   @test.assertTrue (true), "True 2"
 
 casper.then ->
-  @test.assertTrue (false), "False 1"
+  @test.assertTrue (true), "False 1"
 
 casper.then ->
-  @test.assertTrue (false), "False 2"
+  @test.assertTrue (true), "False 2"
 
 casper.run ->
   @test.renderResults true, 0, this.cli.get('xunitFileName') || false
