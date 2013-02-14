@@ -26,8 +26,7 @@ The purpose of this plugin is to run functional CapserJS tests in type GRAILS ap
 
     def developers = [[name: "Ulrich VACHON", email: "uvachon@reservoircode.net"]]
 
-    // Location of the plugin's issue tracker.
-    //def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
+    def issueManagement = [ system: "Github", url: "https://github.com/ulrich/grails-casper-plugin/issues" ]
 
     def scm = [url: "https://github.com/ulrich/grails-casper-plugin"]
 
