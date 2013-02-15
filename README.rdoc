@@ -1,7 +1,7 @@
 = Grails CasperJS Tests Runner Plugin http://stillmaintained.com/ulrich/grails-casper-plugin.png
 
 The purpose of this plugin is to run functionals {CapserJS}[http://casperjs.org/] tests in Grails application.
-The results of these tests are reported in xUnit XML files format. To execute an functionnal CasperJS test, you must put your tests files in the <b>test/casper</b> directory.
+The results of these tests are reported in xUnit XML files format. To execute functionnals CasperJS tests, you must put your tests files in the <b>test/casper</b> directory.
 They may can be written both Javascript and CoffeeScript language.
 
 To more informations about {CapserJS}[http://casperjs.org/]/{PhantomJS}[http://phantomjs.org/] tools, you can read this {introduction}[http://casperjs.org/testing.html].
