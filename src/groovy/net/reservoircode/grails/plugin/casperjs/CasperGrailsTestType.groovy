@@ -65,7 +65,7 @@ class CasperGrailsTestType extends GrailsTestTypeSupport {
      */
     protected int doPrepare() {
         sourceDir.eachFileRecurse(FILES, { file ->
-            SUFFIXES.findAll {
+            SUFFIXES.each {
                 if (file.name.endsWith(it)) {
                     casperFiles << file
                 }
