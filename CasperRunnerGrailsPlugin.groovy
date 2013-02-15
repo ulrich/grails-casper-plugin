@@ -43,7 +43,7 @@ class CasperRunnerGrailsPlugin {
     def authorEmail = "uvachon@reservoircode.net"
 
     def description = '''\
-The purpose of this plugin is to run functional CapserJS tests in type GRAILS application. The results of these tests are reported in xUnit XML files compatible. To run the tests, you must enter the following command: grails test-app casper:
+The purpose of this plugin is to run functional CapserJS tests in Grails application. The results of these tests are reported in xUnit XML files compatible. To run the tests, you must enter the following command: grails test-app casper:
 '''
     def documentation = "https://github.com/ulrich/grails-casper-plugin"
 
