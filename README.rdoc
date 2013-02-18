@@ -8,6 +8,8 @@ To more informations about {CapserJS}[http://casperjs.org/]/{PhantomJS}[http://p
 
 == Installation
 
+Before, you must install and configure the PhantomJS CapserJS tools. See the corresponding documentations for installs.
+
 To install the latest stable version of the plugin run:
 
   grails install-plugin casper-runner
