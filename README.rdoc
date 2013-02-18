@@ -12,13 +12,20 @@ To install the latest stable version of the plugin run:
 
   grails install-plugin casper-runner
 
+You can also package and install <b>casper-runner</b> plugin for specific version by the following way:
+
+  git clone git://github.com/ulrich/grails-casper-plugin.git
+  git checkout TAG_VERSION
+  grails package-plugin
+  grails install-plugin ./grails-casper-runner-TAG_VERSION.zip -global
+
 == Using
 
 To run the tests, you must enter the following command:
 
   grails test-app casper:
 
-Moreover in this first draft, you must indicate in <b>run method</b> how to render the xUnit file used by plugin for result test parsing. Like this:
+Moreover in this first draft, you must add in <b>run method</b> how to render the xUnit file used by plugin for result test parsing. Like this:
 
   casper.run(function() {
     this.test.renderResults(true, 0, this.cli.get('xunitFileName'));
