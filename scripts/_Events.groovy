@@ -35,23 +35,23 @@ casperTests = ["casper"]
 
 loadClass = { className ->
     def load = { name ->
-        classLoader.loadClass (name)
+        classLoader.loadClass(name)
     }
     try {
-        load (className)
+        load(className)
     } catch (ClassNotFoundException e) {
-        compile ()
-        load (className)
+        compile()
+        load(className)
     }
 }
 
 eventTestPhasesStart = { phases ->
     // http://jira.grails.org/browse/GRAILS-6453
-    def testType = loadClass ('net.reservoircode.grails.plugin.casperjs.CasperGrailsTestType')
+    def testType = loadClass('net.reservoircode.grails.plugin.casperjs.CasperGrailsTestType')
 
     [casper: casperTests].each { name, types ->
-        if (!types.any {it.class == testType}) {
-            types << testType.newInstance (testTypeName, testDirectory)
+        if (!types.any { it.class == testType }) {
+            types << testType.newInstance(testTypeName, testDirectory)
         }
     }
 }

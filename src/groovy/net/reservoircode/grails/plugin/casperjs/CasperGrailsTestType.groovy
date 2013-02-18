@@ -32,6 +32,9 @@ import org.codehaus.groovy.grails.test.support.GrailsTestTypeSupport
 
 import static groovy.io.FileType.FILES
 
+/**
+ * Grails CasperJS Tests Runner.
+ */
 public class CasperGrailsTestType extends GrailsTestTypeSupport {
 
     // the tests files extensions collection
