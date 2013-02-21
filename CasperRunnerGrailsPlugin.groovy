@@ -28,7 +28,7 @@
  */
 class CasperRunnerGrailsPlugin {
 
-    def version = "0.2"
+    def version = "0.3-SNAPSHOT"
 
     def grailsVersion = "2.0 > *"
 
