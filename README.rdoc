@@ -21,6 +21,21 @@ You can also package and install <b>casper-runner</b> plugin for specific versio
   grails package-plugin
   grails install-plugin ./grails-casper-runner-TAG_VERSION.zip -global
 
+Declare the plugin in the Config.groovy like this:
+
+  plugins {
+    runtime ":hibernate:$grailsVersion"
+    ...
+
+    runtime ":yui-minify-resources:0.1.4"
+    ...
+
+    build ":tomcat:$grailsVersion"
+    ...
+
+    <b>test ":casper-runner:TAG_VERSION"</b>
+  }
+
 == Using
 
 To run the tests, you must enter the following command:
