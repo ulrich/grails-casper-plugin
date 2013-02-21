@@ -25,20 +25,20 @@
 
 package net.reservoircode.grails.plugin.casperjs
 
+import static groovy.io.FileType.FILES
 import grails.build.logging.GrailsConsole
+
 import org.codehaus.groovy.grails.test.GrailsTestTypeResult
 import org.codehaus.groovy.grails.test.event.GrailsTestEventPublisher
 import org.codehaus.groovy.grails.test.support.GrailsTestTypeSupport
 
-import static groovy.io.FileType.FILES
-
 /**
  * Grails CasperJS Tests Runner.
  */
-public class CasperGrailsTestType extends GrailsTestTypeSupport {
+class CasperGrailsTestType extends GrailsTestTypeSupport {
 
     // the tests files extensions collection
-    static final SUFFIXES = ['coffee', 'js']
+    static final List SUFFIXES = ['coffee', 'js']
 
     // the instance of grails console
     GrailsConsole grailsConsole
@@ -46,23 +46,23 @@ public class CasperGrailsTestType extends GrailsTestTypeSupport {
     // the CasperJS files registered to be execute
     def casperFiles = []
 
-    public CasperGrailsTestType(testTypeName, testDirectory) {
+    CasperGrailsTestType(testTypeName, testDirectory) {
         super(testTypeName, testDirectory)
 
         grailsConsole = GrailsConsole.getInstance()
     }
 
     /**
-     * This method return the tests files extension manageable by the plugin.
+     * Return the tests files extension manageable by the plugin.
      *
      * @return the tests files extension.
      */
     protected List<String> getTestExtensions() {
-        [SUFFIXES].asImmutable()
+        SUFFIXES.asImmutable()
     }
 
     /**
-     * This method scans recursively the tests directories to find, count and register tests files.
+     * Scans recursively the tests directories to find, count and register tests files.
      *
      * @return the number of tests files.
      */
@@ -74,9 +74,9 @@ public class CasperGrailsTestType extends GrailsTestTypeSupport {
                 }
             }
         })
-        def numberOfTest = casperFiles.size()
+        int numberOfTest = casperFiles.size()
 
-        if (numberOfTest < 1) {
+        if (numberOfTest == 0) {
             grailsConsole.addStatus('No CasperJS test to execute')
         } else {
             grailsConsole.addStatus("Executing following CasperJS test(s) file(s): ${casperFiles.collect { it.name }}")
@@ -85,16 +85,16 @@ public class CasperGrailsTestType extends GrailsTestTypeSupport {
     }
 
     /**
-     * This method aims to run all found CasperJS tests files.
+     * Run all found CasperJS tests files.
      */
     protected GrailsTestTypeResult doRun(GrailsTestEventPublisher eventPublisher) {
-        def totalOfFailureTest = 0
-        def totalOfSuccessTest = 0
+        int totalOfFailureTest = 0
+        int totalOfSuccessTest = 0
 
         // run all found Casper tests
         casperFiles.each { casperFile ->
             // build xunit file name
-            def xunitFileName = "target/TESTS-casperjs-${casperFile.name}.xml"
+            String xunitFileName = "target/TESTS-casperjs-${casperFile.name}.xml"
 
             // build casperjs process for current file
             def casperProcess = "casperjs test $casperFile --xunitFileName=$xunitFileName".execute()
@@ -103,14 +103,14 @@ public class CasperGrailsTestType extends GrailsTestTypeSupport {
             casperProcess.waitFor()
 
             // get the content of xunit file
-            String resultFileContent = new File("$xunitFileName").text
+            String resultFileContent = new File(xunitFileName).text
 
             // parse the content file to build status
-            def testSuite = new XmlSlurper().parse(new StringReader(resultFileContent))
+            def testSuite = new XmlSlurper().parseText(resultFileContent)
 
-            def numberOfTest = testSuite.testcase.size()
-            def numberOfFailureTest = testSuite.testcase.failure.size()
-            def numberOfSuccessTest = numberOfTest - numberOfFailureTest
+            int numberOfTest = testSuite.testcase.size()
+            int numberOfFailureTest = testSuite.testcase.failure.size()
+            int numberOfSuccessTest = numberOfTest - numberOfFailureTest
 
             totalOfFailureTest += numberOfFailureTest
             totalOfSuccessTest += numberOfSuccessTest

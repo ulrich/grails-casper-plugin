@@ -32,18 +32,10 @@ class CasperRunnerGrailsPlugin {
 
     def grailsVersion = "2.0 > *"
 
-    def pluginExcludes = [
-            "grails-app/views/error.gsp"
-    ]
-
     def title = "CasperJS Tests Runner Plugin"
 
-    def author = "Ulrich VACHON"
-
-    def authorEmail = "uvachon@reservoircode.net"
-
     def description = '''\
-The purpose of this plugin is to run functional CapserJS tests in Grails application. The results of these tests are reported in xUnit XML files compatible. To run the tests, you must enter the following command: grails test-app casper:
+Runs functional CapserJS tests in Grails application. The results of these tests are reported in xUnit XML files compatible. To run the tests, you must enter the following command: grails test-app casper:
 '''
     def documentation = "https://github.com/ulrich/grails-casper-plugin"
 
