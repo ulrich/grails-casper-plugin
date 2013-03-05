@@ -1,5 +1,5 @@
 grails.project.work.dir = 'target'
-grails.project.target.level = 1.6
+grails.project.target.level = 1.7
 
 grails.project.dependency.resolution = {
 
